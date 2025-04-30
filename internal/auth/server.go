@@ -1,22 +1,20 @@
-package server
+package auth
 
 import (
-    "context"
+	"context"
 
-    pb "your_org/your_auth/api/auth/v1"
-    "github.com/golang/protobuf/ptypes/empty"
-    "google.golang.org/grpc/codes"
-    "google.golang.org/grpc/status"
-
-    "your_org/your_auth/internal/auth"
+	pb "github.com/Ostap00034/course-work-backend-auth-service/api/auth/v1"
+	"github.com/golang/protobuf/ptypes/empty"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 type AuthServer struct {
     pb.UnimplementedAuthServiceServer
-    svc auth.Service
+    svc Service
 }
 
-func NewAuthServer(svc auth.Service) *AuthServer {
+func NewAuthServer(svc Service) *AuthServer {
     return &AuthServer{svc: svc}
 }
 

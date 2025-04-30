@@ -6,7 +6,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Ostap00034/course-work-backend/auth-service/ent"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent"
 )
 
 // The TokenFunc type is an adapter to allow the use of ordinary

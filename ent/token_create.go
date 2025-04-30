@@ -10,7 +10,7 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/Ostap00034/course-work-backend/auth-service/ent/token"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent/token"
 	"github.com/google/uuid"
 )
 

@@ -5,12 +5,12 @@ package enttest
 import (
 	"context"
 
-	"github.com/Ostap00034/course-work-backend/auth-service/ent"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent"
 	// required by schema hooks.
-	_ "github.com/Ostap00034/course-work-backend/auth-service/ent/runtime"
+	_ "github.com/Ostap00034/course-work-backend-auth-service/ent/runtime"
 
 	"entgo.io/ent/dialect/sql/schema"
-	"github.com/Ostap00034/course-work-backend/auth-service/ent/migrate"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent/migrate"
 )
 
 type (

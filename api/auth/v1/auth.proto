@@ -3,7 +3,7 @@ syntax = "proto3";
 package auth.v1;
 
 // Путь для go-кода: {модуль}/api/auth/v1;v1
-option go_package = "github.com/Ostap00034/course-work-backend/auth-service/api/auth/v1;v1";
+option go_package = "github.com/Ostap00034/course-work-backend-auth-service/api/auth/v1;v1";
 
 import "google/protobuf/empty.proto";
 

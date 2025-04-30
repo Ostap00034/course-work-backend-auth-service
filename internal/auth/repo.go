@@ -5,8 +5,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/Ostap00034/course-work-backend/auth-service/ent"
-	"github.com/Ostap00034/course-work-backend/auth-service/ent/token"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent/token"
 	"github.com/google/uuid"
 )
 

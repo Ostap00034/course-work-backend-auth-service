@@ -5,7 +5,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/Ostap00034/course-work-backend/auth-service/ent"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent"
 	_ "github.com/lib/pq" // подключаем драйвер PostgreSQL
 )
 

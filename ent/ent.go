@@ -12,7 +12,7 @@ import (
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
-	"github.com/Ostap00034/course-work-backend/auth-service/ent/token"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent/token"
 )
 
 // ent aliases to avoid import conflicts in user's code.

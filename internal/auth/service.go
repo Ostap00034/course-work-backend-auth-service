@@ -6,8 +6,8 @@ import (
     "time"
 
     "github.com/google/uuid"
-    userpb "github.com/Ostap00034/course-work-backend/user-service/api/user/v1"
-    "github.com/Ostap00034/course-work-backend/auth-service/util/jwt"
+    userpb "github.com/Ostap00034/course-work-backend-user-service/api/user/v1"
+    "github.com/Ostap00034/course-work-backend-auth-service/util/jwt"
 )
 
 type Service interface {

@@ -9,13 +9,13 @@ import (
 	"log"
 	"reflect"
 
-	"github.com/Ostap00034/course-work-backend/auth-service/ent/migrate"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent/migrate"
 	"github.com/google/uuid"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect"
 	"entgo.io/ent/dialect/sql"
-	"github.com/Ostap00034/course-work-backend/auth-service/ent/token"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent/token"
 )
 
 // Client is the client that holds all ent builders.

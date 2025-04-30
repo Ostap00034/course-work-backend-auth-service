@@ -5,8 +5,8 @@ package ent
 import (
 	"time"
 
-	"github.com/Ostap00034/course-work-backend/auth-service/ent/schema"
-	"github.com/Ostap00034/course-work-backend/auth-service/ent/token"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent/schema"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent/token"
 	"github.com/google/uuid"
 )
 

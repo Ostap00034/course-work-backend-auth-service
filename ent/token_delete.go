@@ -8,8 +8,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/Ostap00034/course-work-backend/auth-service/ent/predicate"
-	"github.com/Ostap00034/course-work-backend/auth-service/ent/token"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent/predicate"
+	"github.com/Ostap00034/course-work-backend-auth-service/ent/token"
 )
 
 // TokenDelete is the builder for deleting a Token entity.
