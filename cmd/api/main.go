@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
-	pb "github.com/Ostap00034/course-work-backend-auth-service/api/auth/v1"
-	userpb "github.com/Ostap00034/course-work-backend-user-service/api/user/v1"
+	authpbv1 "github.com/Ostap00034/course-work-backend-api-specs/gen/go/auth/v1"
+	userpbv1 "github.com/Ostap00034/course-work-backend-api-specs/gen/go/user/v1"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -31,11 +31,15 @@ func main() {
 	client := db.NewClient(dbString)
 	defer client.Close()
 
-	userConn, err := grpc.NewClient(os.Getenv("USER_ADDR"), grpc.WithTransportCredentials(insecure.NewCredentials()))
+	userAddr, exists := os.LookupEnv("USER_ADDR")
+	if !exists {
+		log.Fatal("not USER_ADDR in .env file")
+	}
+	userConn, err := grpc.NewClient(userAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("cannot connect to user service: %v", err)
 	}
-	userClient := userpb.NewUserServiceClient(userConn)
+	userClient := userpbv1.NewUserServiceClient(userConn)
 
 	repo := auth.NewRepo(client)
 	svc := auth.NewService(repo, userClient, 24*time.Hour)
@@ -43,7 +47,7 @@ func main() {
 	lis, _ := net.Listen("tcp", ":50051")
 	srv := grpc.NewServer()
 	authSrv := auth.NewAuthServer(svc)
-	pb.RegisterAuthServiceServer(srv, authSrv)
+	authpbv1.RegisterAuthServiceServer(srv, authSrv)
 
 	log.Println("AuthService listening on :50051")
 	if err := srv.Serve(lis); err != nil {
