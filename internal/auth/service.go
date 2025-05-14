@@ -5,7 +5,8 @@ import (
 	"errors"
 	"time"
 
-	userpb "github.com/Ostap00034/course-work-backend-api-specs/gen/go/user/v1"
+	commonpbv1 "github.com/Ostap00034/course-work-backend-api-specs/gen/go/common/v1"
+	userpbv1 "github.com/Ostap00034/course-work-backend-api-specs/gen/go/user/v1"
 	"github.com/Ostap00034/course-work-backend-auth-service/util/jwt"
 	"github.com/google/uuid"
 )
@@ -19,23 +20,23 @@ var (
 
 type Service interface {
 	Login(ctx context.Context, email, password string) (token string, expiresAt time.Time, err error)
-	ValidateToken(ctx context.Context, tokenStr string) (*jwt.Claims, error)
+	ValidateToken(ctx context.Context, tokenStr string) (*jwt.Claims, *commonpb.UserData, error)
 	Revoke(ctx context.Context, tokenStr string) error
 }
 
 type service struct {
 	repo       Repository
-	userClient userpb.UserServiceClient
+	userClient userpbv1.UserServiceClient
 	tokenTTL   time.Duration
 }
 
-func NewService(r Repository, uc userpb.UserServiceClient, ttl time.Duration) Service {
+func NewService(r Repository, uc userpbv1.UserServiceClient, ttl time.Duration) Service {
 	return &service{repo: r, userClient: uc, tokenTTL: ttl}
 }
 
 func (s *service) Login(ctx context.Context, email, password string) (string, time.Time, error) {
 	// Проверяем учетку в UserService
-	resp, err := s.userClient.ValidateCredentials(ctx, &userpb.ValidateCredentialsRequest{
+	resp, err := s.userClient.ValidateCredentials(ctx, &userpbv1.ValidateCredentialsRequest{
 		Email:    email,
 		Password: password,
 	})
@@ -48,7 +49,7 @@ func (s *service) Login(ctx context.Context, email, password string) (string, ti
 	}
 	// Генерируем JWT
 	exp := time.Now().Add(s.tokenTTL)
-	claims := jwt.NewClaims(userID.String(), exp)
+	claims := jwt.NewClaims(userID.String(), resp.Role, exp)
 	tok, err := jwt.GenerateToken(claims)
 	if err != nil {
 		return "", time.Time{}, err
@@ -60,15 +61,27 @@ func (s *service) Login(ctx context.Context, email, password string) (string, ti
 	return tok, exp, nil
 }
 
-func (s *service) ValidateToken(ctx context.Context, tokenStr string) (*jwt.Claims, error) {
+func (s *service) ValidateToken(ctx context.Context, tokenStr string) (*jwt.Claims, *commonpbv1.UserData, error) {
 	t, err := s.repo.GetToken(ctx, tokenStr)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	if t.Revoked || (t.ExpiresAt != nil && t.ExpiresAt.Before(time.Now())) {
-		return nil, ErrTokenInvalidOrExpired
+		return nil, nil, ErrTokenInvalidOrExpired
 	}
-	return jwt.ParseToken(tokenStr)
+
+	res, err := s.userClient.GetUserById(ctx, &userpbv1.GetUserByIdRequest{
+		UserId: t.UserID.String(),
+	})
+	if err != nil {
+		return nil, nil, err
+	}
+
+	claims, err := jwt.ParseToken(tokenStr)
+	if err != nil {
+		return nil, nil, err
+	}
+	return claims, res.User, nil
 }
 
 func (s *service) Revoke(ctx context.Context, tokenStr string) error {

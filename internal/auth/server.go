@@ -21,7 +21,7 @@ func NewAuthServer(svc Service) *AuthServer {
 func (s *AuthServer) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
 	tok, exp, err := s.svc.Login(ctx, req.Email, req.Password)
 	if err != nil {
-		return nil, status.Error(codes.Unauthenticated, err.Error())
+		return nil, status.Error(codes.NotFound, err.Error())
 	}
 	return &pb.LoginResponse{
 		Token:     tok,
@@ -30,12 +30,14 @@ func (s *AuthServer) Login(ctx context.Context, req *pb.LoginRequest) (*pb.Login
 }
 
 func (s *AuthServer) ValidateToken(ctx context.Context, req *pb.ValidateTokenRequest) (*pb.ValidateTokenResponse, error) {
-	claims, err := s.svc.ValidateToken(ctx, req.Token)
+	claims, user, err := s.svc.ValidateToken(ctx, req.Token)
 	if err != nil {
 		return nil, status.Errorf(codes.Unauthenticated, err.Error())
 	}
+
 	return &pb.ValidateTokenResponse{
 		UserId:    claims.UserID,
+		User:      user,
 		ExpiresAt: claims.ExpiresAt.Unix(),
 	}, nil
 }

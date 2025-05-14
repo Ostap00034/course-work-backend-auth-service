@@ -1,0 +1,9 @@
+2025/05/02 22:54:50 AuthService listening on :50051
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x20 pc=0x105388524]
+
+goroutine 1 [running]:
+google.golang.org/grpc.(*Server).Serve(0x1400040a000, {0x0, 0x0})
+	/Users/ostapchichiginarov/go/pkg/mod/google.golang.org/grpc@v1.72.0/server.go:869 +0x164
+main.main()
+	/Users/ostapchichiginarov/CourseWork/course-work-backend/auth-service/cmd/api/main.go:53 +0x38c

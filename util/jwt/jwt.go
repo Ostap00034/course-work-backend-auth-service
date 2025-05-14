@@ -12,12 +12,14 @@ var secret = []byte(os.Getenv("JWT_SECRET"))
 
 type Claims struct {
     UserID string `json:"user_id"`
+    Role string `json:"role"`
     jwt.RegisteredClaims
 }
 
-func NewClaims(userID string, exp time.Time) Claims {
+func NewClaims(userID, role string, exp time.Time) Claims {
     return Claims{
         UserID: userID,
+        Role: role,
         RegisteredClaims: jwt.RegisteredClaims{
             ExpiresAt: jwt.NewNumericDate(exp),
         },
