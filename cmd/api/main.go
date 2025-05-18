@@ -24,16 +24,16 @@ func init() {
 }
 
 func main() {
-	dbString, exists := os.LookupEnv("DB_CONN_STRING")
+	dbString, exists := os.LookupEnv("AUTH_DB_CONN_STRING")
 	if !exists {
-		log.Fatal("not DB_CONN_STRING in .env file")
+		log.Fatal("not AUTH_DB_CONN_STRING in .env file")
 	}
 	client := db.NewClient(dbString)
 	defer client.Close()
 
-	userAddr, exists := os.LookupEnv("USER_ADDR")
+	userAddr, exists := os.LookupEnv("USER_SERVICE_ADDR")
 	if !exists {
-		log.Fatal("not USER_ADDR in .env file")
+		log.Fatal("not USER_SERVICE_ADDR in .env file")
 	}
 	userConn, err := grpc.NewClient(userAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
