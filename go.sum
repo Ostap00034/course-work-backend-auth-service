@@ -8,6 +8,8 @@ github.com/Ostap00034/course-work-backend-api-specs v0.1.1 h1:rvKP2nHvo81N1Z62to
 github.com/Ostap00034/course-work-backend-api-specs v0.1.1/go.mod h1:aoxMuUnkZCsk4bDNROXrMs7rroGVzhm5MWI/EK7UP8E=
 github.com/Ostap00034/course-work-backend-api-specs v0.1.6 h1:Be2b0s3yGUsCwHoX1Wg78rVJaRsR7knjouip3qmI5tU=
 github.com/Ostap00034/course-work-backend-api-specs v0.1.6/go.mod h1:aoxMuUnkZCsk4bDNROXrMs7rroGVzhm5MWI/EK7UP8E=
+github.com/Ostap00034/course-work-backend-api-specs v0.1.11 h1:4c8AMRKsno8Cm20sUhi7yNyIPbz5Ldnf7QUQOxQpiJo=
+github.com/Ostap00034/course-work-backend-api-specs v0.1.11/go.mod h1:HooHRAyQZ2lQHe9dhqy1lwXRqqsMpq99IzIWEP+jgmg=
 github.com/Ostap00034/course-work-backend-user-service v0.0.0-20250514045958-722718422868 h1:Do3XDH/21Y1UNs9bOy/AhQ2cXETXKx/qDxcDwmyNqjo=
 github.com/Ostap00034/course-work-backend-user-service v0.0.0-20250514045958-722718422868/go.mod h1:weIubYvtbiWs8/MAdfNAodmtfcyf1i4g/sENhun5B4g=
 github.com/Ostap00034/course-work-backend-user-service v0.1.1 h1:SX5FDOYb8hPxIZ+bHyKhx5koz/jRJ2oB+BzAKe1Vssc=

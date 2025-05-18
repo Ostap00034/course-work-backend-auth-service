@@ -4,7 +4,7 @@ go 1.23.2
 
 require google.golang.org/grpc v1.72.0
 
-require github.com/Ostap00034/course-work-backend-api-specs v0.1.6
+require github.com/Ostap00034/course-work-backend-api-specs v0.1.11
 
 require github.com/Ostap00034/course-work-backend-user-service v0.1.1 // indirect
 

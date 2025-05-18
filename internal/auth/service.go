@@ -20,7 +20,7 @@ var (
 
 type Service interface {
 	Login(ctx context.Context, email, password string) (token string, expiresAt time.Time, err error)
-	ValidateToken(ctx context.Context, tokenStr string) (*jwt.Claims, *commonpb.UserData, error)
+	ValidateToken(ctx context.Context, tokenStr string) (*jwt.Claims, *commonpbv1.UserData, error)
 	Revoke(ctx context.Context, tokenStr string) error
 }
 
